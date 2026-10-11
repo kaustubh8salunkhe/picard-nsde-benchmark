@@ -4,10 +4,10 @@ import torch
 class EulerMaruyamaPricer:
     @staticmethod
     def price_batch(model, S, K, T, r, steps=100, mc_paths=10000, device="cpu"):
-        S = S.to(device)
-        K = K.to(device)
-        T = T.to(device)
-        r = r.to(device)
+        S = S.to(device).view(-1)
+        K = K.to(device).view(-1)
+        T = T.to(device).view(-1)
+        r = r.to(device).view(-1)
 
         batch_size = len(S)
         dt = (T / steps).unsqueeze(1)
@@ -24,19 +24,22 @@ class EulerMaruyamaPricer:
             X = X + r_mat * X * dt + sig * X * dW
 
         payoff = torch.clamp(X - K.unsqueeze(1), min=0.0)
-        discounted = torch.exp(-r.unsqueeze(1) * T.unsqueeze(1)) * torch.mean(payoff, dim=1)
+        mean_payoff = torch.mean(payoff, dim=1)  # shape: (batch,)
+        discount = torch.exp(-r * T)              # shape: (batch,)
+        discounted = torch.clamp(discount * mean_payoff, min=0.0)
         return discounted
 
 
 class FractionalVolterraPricer:
     @staticmethod
     def price_batch(model, alpha, S, K, T, r, steps=128, mc_paths=5000, device="cpu"):
-        S = S.to(device)
-        K = K.to(device)
-        T = T.to(device)
-        r = r.to(device)
-        alpha = alpha.to(device)
+        S = S.to(device).view(-1)
+        K = K.to(device).view(-1)
+        T = T.to(device).view(-1)
+        r = r.to(device).view(-1)
+        alpha = alpha.to(device).view(-1)
 
+        batch_size = len(S)
         dt = (T / steps).unsqueeze(1)
         sqrt_dt = torch.sqrt(dt)
 
@@ -55,5 +58,7 @@ class FractionalVolterraPricer:
             X = X + b * dt + kernel_weight * sig * dW
 
         payoff = torch.clamp(X - K.unsqueeze(1), min=0.0)
-        discounted = torch.exp(-r.unsqueeze(1) * T.unsqueeze(1)) * torch.mean(payoff, dim=1)
+        mean_payoff = torch.mean(payoff, dim=1)  # shape: (batch,)
+        discount = torch.exp(-r * T)              # shape: (batch,)
+        discounted = torch.clamp(discount * mean_payoff, min=0.0)
         return discounted
