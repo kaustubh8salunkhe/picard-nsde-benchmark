@@ -92,7 +92,7 @@ B (Caputo TFBSM) & Frac-NSDE & Low-$\alpha$ OOD ($\alpha \le 0.35$) & 2.622529 &
 \section{Failure Modes \& Empirical Analysis}
 \begin{enumerate}
     \item \textbf{Arbitrage Bound Violations (Block A):} In the extrapolation regime, the Neural SDE exhibited a 25.0\% arbitrage failure rate. For deep out-of-the-money regimes ($S < 60$), the surrogate generated negative option prices that breached the discounted intrinsic lower bound ($\hat{V} < \max(S - K e^{-rT}, 0)$). In contrast, Picard iteration preserved exact no-arbitrage bounds (0.0\% violations).
-    \item \textbf{Subdiffusive Singularity Breakdown (Block B):} For low fractional orders ($\alpha \in [0.15, 0.40)$), the Neural SDE error surged ($RMSE = 2.623$, $MaxAE = 3.691$). The weakly singular kernel $(\tau - s)^{\alpha - 1}$ destabilizes uniform discretization paths, whereas the graded Volterra--Picard scheme maintained stable convergence ($RMSE = 0.003375$).
+    \item \textbf{Subdiffusive Singularity Breakdown (Block B):} For low fractional orders ($\alpha \in [0.15, 0.40)$), the Neural SDE error surged ($RMSE = 2.623$, $MaxAE = 3.691$). The weakly singular kernel $(\tau - s)^{\alpha - 1}$ destabilizes uniform discretization paths, whereas the uniform temporal discretization on $[0, T]$ maintained stable convergence ($RMSE = 0.003375$).
 \end{enumerate}
 
 \end{document}
