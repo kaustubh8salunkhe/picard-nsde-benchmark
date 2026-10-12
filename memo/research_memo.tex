@@ -15,6 +15,16 @@
 We present a pre-registered computational benchmark evaluating Picard iterative contraction against learned Neural Stochastic Differential Equation (NSDE) surrogates for European call pricing. The study isolates Classical Black--Scholes--Merton (BSM) and Caputo Time-Fractional BSM (TFBSM) into distinct experiment blocks. We show that while NSDEs provide fast amortized inference, they suffer from boundary arbitrage violations and fail to capture extreme subdiffusive memory regimes ($\alpha < 0.35$), whereas Picard schemes maintain rigorous error bounds and numerical stability across all domains.
 \end{abstract}
 
+\begin{center}
+\noindent\fbox{%
+\parbox{0.95\textwidth}{%
+\textbf{Provenance \& Retraction Notice (October 12, 2026):} \\
+The result tables in this document (including reported violation rates of 5.0\%/13.3\% and 25.0\%/0.0\%) reflect arithmetic on 4-row smoke-test stubs and preliminary pilot runs, not a completed evaluation over the configured 2,500-case suite. These metrics and generalized stability claims are formally retracted. Historical artifacts are retained solely for audit provenance.
+}%
+}
+\end{center}
+\vspace{1em}
+
 \section{Governing Equations \& Setup}
 \subsection{Block A: Classical BSM}
 In log-moneyness $x = \ln(S/K)$ and forward time $\tau = T - t$, the discounted call $u(\tau, x) = e^{r\tau} V/K$ satisfies:
