@@ -1,3 +1,11 @@
+> ### Status & Provenance Notice (October 12, 2026)
+>
+> **Notice on Benchmark Results and Historical Stubs:**
+> - **Evaluation Scope:** The CSV files in `outputs/raw/` (`block_a_bsm_test_ext_results.csv`, etc.) contain 3–4 rows and represent **illustrative dry-run smoke-test stubs**, not completed runs over the full 2,500-case parameter suites. The full 2,500-case evaluation was never completed or retained due to implementation exceptions.
+> - **Claim Retraction:** All reported aggregate metrics—including the 25.0% / 0.0% and 5.0% / 13.3% contraction/arbitrage violation rates—are **fully retracted** as benchmark findings. They reflect arithmetic on 4-row stubs and pilot synthetic samples, not statistically validated results.
+> - **Theoretical Scope:** All generalized claims asserting guaranteed Picard contraction or intrinsic structural fragility of neural diffusion operators are retracted; Picard convergence is strictly confined to classical proved Lipschitz assumptions over bounded domains.
+> - **Artifact Availability:** No original model checkpoints (`.pt`), raw execution logs, or compiled PDFs exist in version control or external storage.
+
 # Picard vs. Neural SDE: Option Pricing Benchmark
 
 A reproducible computational benchmark comparing **Picard Iterative Methods** against **Learned Neural SDEs (NSDE)** for European call option pricing under standard Black–Scholes–Merton (BSM) formulation.
